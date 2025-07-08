@@ -24,6 +24,8 @@ export const labels = [
   },
 ]
 
+
+
 export const statuses = [
   {
     value: 'backlog',
@@ -50,6 +52,33 @@ export const statuses = [
     label: 'Canceled',
     icon: IconCircleX,
   },
+]
+export const ProductStatus=[
+  {
+    value: 'In Stock',
+    label: 'Available',
+    icon: IconExclamationCircle,
+  },
+  {
+    value: 'todo',
+    label: 'Todo',
+    icon: IconCircle,
+  },
+  {
+    value: 'Out of Stock',
+    label: 'Not Available',
+    icon: IconStopwatch,
+  },
+  {
+    value: 'Low Stock',
+    label: 'Low Stock',
+    icon: IconCircleCheck,
+  },
+  // {
+  //   value: 'canceled',
+  //   label: 'Canceled',
+  //   icon: IconCircleX,
+  // },
 ]
 
 export const priorities = [

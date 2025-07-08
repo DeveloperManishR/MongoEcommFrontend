@@ -1,13 +1,22 @@
-import axios, { AxiosInstance } from "axios";
+// useFetchData.ts
+import { useQuery, UseQueryResult } from '@tanstack/react-query'
+import axios, { AxiosError } from 'axios'
 
+export interface UseFetchDataOptions<T> {
+  queryKey: string
+  url: string
+}
 
-export const authAxios = (token?: string): AxiosInstance => {
-    
-    return axios.create({
-      
-       baseURL:`${import.meta.env.VITE_BASE_URL}/api/admin`,
-        headers: {
-            'Authorization': `${token ? `${token}` : ''}`,
-        },
-    });
-};
+// Generic reusable hook
+export function useFetchData<T = any>({
+  queryKey,
+  url,
+}: UseFetchDataOptions<T>): UseQueryResult<T, AxiosError> {
+  return useQuery<T, AxiosError>({
+    queryKey: [queryKey],
+    queryFn: async () => {
+      const response = await axios.get<T>(url)
+      return response.data
+    },
+  })
+}

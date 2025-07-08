@@ -8,9 +8,15 @@ import { DataTable } from './components/data-table'
 import { TasksDialogs } from './components/tasks-dialogs'
 import { TasksPrimaryButtons } from './components/tasks-primary-buttons'
 import TasksProvider from './context/tasks-context'
+import { useFetchData } from '@/config/config'
 
 export default function Products() {
+ const { data, isPending, error } = useFetchData({
+    queryKey: 'products',
+    url: `${import.meta.env.VITE_BASEURL}/admin/product`,
+  })
 
+  console.log("data",data?.data?.docs)
   
   return (
     <TasksProvider>
@@ -33,7 +39,7 @@ export default function Products() {
           <TasksPrimaryButtons />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-          <DataTable data={[]} columns={columns} />
+          <DataTable data={data?.data?.docs||[]} columns={columns} />
         </div>
       </Main>
 

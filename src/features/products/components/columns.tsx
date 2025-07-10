@@ -94,7 +94,7 @@ export const columns: ColumnDef<any>[] = [
   {
     accessorKey: 'availabilityStatus',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Availability Status' />
+      <DataTableColumnHeader column={column} title='Status' />
     ),
     cell: ({ row }) => {
       const status = ProductStatus.find(
@@ -118,35 +118,9 @@ export const columns: ColumnDef<any>[] = [
       return value.includes(row.getValue(id))
     },
   },
-  // {
-  //   accessorKey: 'priority',
-  //   header: ({ column }) => (
-  //     <DataTableColumnHeader column={column} title='Priority' />
-  //   ),
-  //   cell: ({ row }) => {
-  //     const priority = priorities.find(
-  //       (priority) => priority.value === row.getValue('priority')
-  //     )
-
-  //     if (!priority) {
-  //       return null
-  //     }
-
-  //     return (
-  //       <div className='flex items-center'>
-  //         {priority.icon && (
-  //           <priority.icon className='text-muted-foreground mr-2 h-4 w-4' />
-  //         )}
-  //         <span>{priority.label}</span>
-  //       </div>
-  //     )
-  //   },
-  //   filterFn: (row, id, value) => {
-  //     return value.includes(row.getValue(id))
-  //   },
-  // },
-  // {
-  //   id: 'actions',
-  //   cell: ({ row }) => <DataTableRowActions row={row} />,
-  // },
+  
+  {
+    id: 'actions',
+    cell: ({ row }) => <DataTableRowActions row={row} />,
+  },
 ]

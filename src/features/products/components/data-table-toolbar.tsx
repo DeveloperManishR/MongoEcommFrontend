@@ -13,7 +13,6 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
-  console.log("tabletable",table.getColumn)
   const isFiltered = table.getState().columnFilters.length > 0
 
   return (

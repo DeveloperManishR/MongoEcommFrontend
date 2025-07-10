@@ -6,6 +6,8 @@ import { TasksMutateDrawer } from './tasks-mutate-drawer'
 
 export function TasksDialogs() {
   const { open, setOpen, currentRow, setCurrentRow } = useTasks()
+
+  console.log("currentRowcurrentRow",currentRow)
   return (
     <>
       <TasksMutateDrawer

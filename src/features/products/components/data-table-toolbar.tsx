@@ -3,7 +3,7 @@ import { Table } from '@tanstack/react-table'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { DataTableViewOptions } from '../components/data-table-view-options'
-import { priorities, statuses } from '../data/data'
+import { priorities, ProductStatus, statuses } from '../data/data'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 
 interface DataTableToolbarProps<TData> {
@@ -13,6 +13,7 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
+  console.log("tabletable",table.getColumn)
   const isFiltered = table.getState().columnFilters.length > 0
 
   return (
@@ -27,20 +28,20 @@ export function DataTableToolbar<TData>({
           className='h-8 w-[150px] lg:w-[250px]'
         />
         <div className='flex gap-x-2'>
-          {table.getColumn('status') && (
+          {table.getColumn('availabilityStatus') && (
             <DataTableFacetedFilter
-              column={table.getColumn('status')}
+              column={table.getColumn('availabilityStatus')}
               title='Status'
-              options={statuses}
+              options={ProductStatus}
             />
           )}
-          {table.getColumn('priority') && (
+          {/* {table.getColumn('priority') && (
             <DataTableFacetedFilter
               column={table.getColumn('priority')}
               title='Priority'
               options={priorities}
             />
-          )}
+          )} */}
         </div>
         {isFiltered && (
           <Button

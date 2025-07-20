@@ -16,21 +16,12 @@ export const Route = createFileRoute('/clerk')({
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 function RouteComponent() {
-  if (!PUBLISHABLE_KEY) {
-    return <MissingClerkPubKey />
-  }
+  // if (!PUBLISHABLE_KEY) {
+  //   return <MissingClerkPubKey />
+  // }
 
   return (
-    <ClerkProvider
-      publishableKey={PUBLISHABLE_KEY}
-      afterSignOutUrl='/clerk/sign-in'
-      signInUrl='/clerk/sign-in'
-      signUpUrl='/clerk/sign-up'
-      signInFallbackRedirectUrl='/clerk/user-management'
-      signUpFallbackRedirectUrl='/clerk/user-management'
-    >
-      <Outlet />
-    </ClerkProvider>
+    <Outlet />
   )
 }
 

@@ -28,31 +28,31 @@ export const Route = createFileRoute('/clerk/_authenticated/user-management')({
 
 function UserManagement() {
   const [opened, setOpened] = useState(true)
-  const { isLoaded, isSignedIn } = useAuth()
+ // const { isLoaded, isSignedIn } = useAuth()
 
-  if (!isLoaded) {
-    return (
-      <div className='flex h-svh items-center justify-center'>
-        <IconLoader2 className='size-8 animate-spin' />
-      </div>
-    )
-  }
+  // if (!isLoaded) {
+  //   return (
+  //     <div className='flex h-svh items-center justify-center'>
+  //       <IconLoader2 className='size-8 animate-spin' />
+  //     </div>
+  //   )
+  // }
 
-  if (!isSignedIn) {
-    return <Unauthorized />
-  }
+  // if (isSignedIn) {
+  //   return <Unauthorized />
+  // }
 
   // Parse user list
   const userList = userListSchema.parse(users)
   return (
     <>
-      <SignedIn>
+      {/* <SignedIn> */}
         <UsersProvider>
           <Header fixed>
             <Search />
             <div className='ml-auto flex items-center space-x-4'>
               <ThemeSwitch />
-              <UserButton />
+              {/* <UserButton /> */}
             </div>
           </Header>
 
@@ -96,7 +96,7 @@ function UserManagement() {
 
           <UsersDialogs />
         </UsersProvider>
-      </SignedIn>
+    
     </>
   )
 }

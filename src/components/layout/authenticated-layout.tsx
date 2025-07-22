@@ -1,17 +1,31 @@
 import Cookies from 'js-cookie'
-import { Outlet } from '@tanstack/react-router'
+import { Outlet, redirect } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 import { SearchProvider } from '@/context/search-context'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
 import SkipToMain from '@/components/skip-to-main'
+import { useAuth } from '@/context/auth-context'
 
 interface Props {
   children?: React.ReactNode
 }
 
 export function AuthenticatedLayout({ children }: Props) {
+
   const defaultOpen = Cookies.get('sidebar_state') !== 'false'
+
+  const { token } = useAuth()
+
+  console.log("token", token)
+
+  // if (!token) {
+  //   throw redirect({
+  //     to: "/sign-in"
+
+  //   })
+  // }
+
   return (
     <SearchProvider>
       <SidebarProvider defaultOpen={defaultOpen}>

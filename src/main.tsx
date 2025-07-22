@@ -1,3 +1,5 @@
+// main.tsx
+
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { AxiosError } from 'axios'
@@ -13,14 +15,13 @@ import { handleServerError } from '@/utils/handle-server-error'
 import { FontProvider } from './context/font-context'
 import { ThemeProvider } from './context/theme-context'
 import './index.css'
-// Generated Routes
 import { routeTree } from './routeTree.gen'
+import { AuthContextValue, AuthProvider, useAuth } from './context/auth-context'
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: (failureCount, error) => {
-        // eslint-disable-next-line no-console
         if (import.meta.env.DEV) console.log({ failureCount, error })
 
         if (failureCount >= 0 && import.meta.env.DEV) return false
@@ -67,22 +68,32 @@ const queryClient = new QueryClient({
   }),
 })
 
-// Create a new router instance
 const router = createRouter({
   routeTree,
-  context: { queryClient },
   defaultPreload: 'intent',
-  defaultPreloadStaleTime: 0,
+  scrollRestoration: true,
+  context: {
+    auth: undefined!, // This will be provided later
+  },
 })
 
-// Register the router instance for type safety
+interface MyRouterContext {
+  auth: AuthContextValue
+}
+
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router
   }
 }
 
-// Render the app
+// ✅ App wrapper that consumes useAuth and passes it to RouterProvider
+function App() {
+  const auth = useAuth()
+
+  return <RouterProvider router={router} context={{ auth }} />
+}
+
 const rootElement = document.getElementById('root')!
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
@@ -91,7 +102,9 @@ if (!rootElement.innerHTML) {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
           <FontProvider>
-            <RouterProvider router={router} />
+            <AuthProvider>
+              <App />
+            </AuthProvider>
           </FontProvider>
         </ThemeProvider>
       </QueryClientProvider>

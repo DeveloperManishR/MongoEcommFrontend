@@ -53,6 +53,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setTimeout(() => {
       setIsLoading(false)
     }, 3000)
+
+    
   }
 
   return (
@@ -98,7 +100,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           Login
         </Button>
 
-        <div className='relative my-2'>
+        {/* <div className='relative my-2'>
           <div className='absolute inset-0 flex items-center'>
             <span className='w-full border-t' />
           </div>
@@ -116,7 +118,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <Button variant='outline' type='button' disabled={isLoading}>
             <IconBrandFacebook className='h-4 w-4' /> Facebook
           </Button>
-        </div>
+        </div> */}
       </form>
     </Form>
   )

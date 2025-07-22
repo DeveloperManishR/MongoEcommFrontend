@@ -6,10 +6,15 @@ import { Toaster } from '@/components/ui/sonner'
 import { NavigationProgress } from '@/components/navigation-progress'
 import GeneralError from '@/features/errors/general-error'
 import NotFoundError from '@/features/errors/not-found-error'
+import { AuthContextValue } from '@/context/auth-context'
 
-export const Route = createRootRouteWithContext<{
-  queryClient: QueryClient
-}>()({
+interface MyRouterContext {
+  auth: AuthContextValue
+}
+export const Route = createRootRouteWithContext<
+//{ queryClient: QueryClient}
+  MyRouterContext
+>()({
   component: () => {
     return (
       <>

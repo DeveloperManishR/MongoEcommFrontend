@@ -56,21 +56,26 @@ export const sidebarData: SidebarData = {
           icon: IconLayoutDashboard,
         },
         {
-          title: 'Tasks',
-          url: '/tasks',
+          title: 'Products',
+          url: '/products',
           icon: IconChecklist,
         },
-        {
-          title: 'Apps',
-          url: '/apps',
-          icon: IconPackages,
-        },
-        {
-          title: 'Chats',
-          url: '/chats',
-          badge: '3',
-          icon: IconMessages,
-        },
+        // {
+        //   title: 'Tasks',
+        //   url: '/tasks',
+        //   icon: IconChecklist,
+        // },
+        // {
+        //   title: 'Apps',
+        //   url: '/apps',
+        //   icon: IconPackages,
+        // },
+        // {
+        //   title: 'Chats',
+        //   url: '/chats',
+        //   badge: '3',
+        //   icon: IconMessages,
+        // },
         {
           title: 'Users',
           url: '/users',

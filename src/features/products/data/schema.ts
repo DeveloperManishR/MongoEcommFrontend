@@ -1,0 +1,57 @@
+import { z } from 'zod'
+
+
+
+
+
+const userStatusSchema = z.union([
+  z.literal('active'),
+  z.literal('inactive'),
+  z.literal('invited'),
+  z.literal('suspended'),
+])
+export type UserStatus = z.infer<typeof userStatusSchema>
+
+const userRoleSchema = z.union([
+  z.literal('superadmin'),
+  z.literal('admin'),
+  z.literal('cashier'),
+  z.literal('manager'),
+])
+
+const userSchema = z.object({
+  id: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
+  username: z.string(),
+  email: z.string(),
+  phoneNumber: z.string(),
+  status: userStatusSchema,
+  role: userRoleSchema,
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+})
+const productSchema = z.object({
+  id: z.string(), // use string to match _id in the JSON
+  title: z.string(),
+  description: z.string(),
+  category: z.string(),
+  price: z.number(),
+  discountPercentage: z.number(),
+  rating: z.number(),
+  stock: z.number(),
+  warrantyInformation: z.string(),
+  shippingInformation: z.string(),
+  availabilityStatus: z.string(),
+  returnPolicy: z.string(),
+  minimumOrderQuantity: z.number(),
+  images: z.array(z.string().url()),
+  thumbnail: z.string().url(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+  isActive: z.boolean(),
+})
+export type User = z.infer<typeof userSchema>
+export type Product = z.infer<typeof productSchema>
+
+export const userListSchema = z.array(userSchema)

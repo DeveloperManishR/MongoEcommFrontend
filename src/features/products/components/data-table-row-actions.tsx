@@ -12,13 +12,14 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { useProducts,useUsers } from '../context/users-context'
 import { Product } from '../data/schema'
+import { useProduct } from '../context/product-context'
 
 interface DataTableRowActionsProps {
   row: Row<Product>
 }
 
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
-  const { setOpen, setCurrentRow } = useUsers()
+  const { setOpen, setCurrentRow } = useProduct()
   return (
     <>
       <DropdownMenu modal={false}>

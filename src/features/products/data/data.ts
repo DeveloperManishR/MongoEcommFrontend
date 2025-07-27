@@ -4,7 +4,7 @@ import {
   IconUsersGroup,
   IconUserShield,
 } from '@tabler/icons-react'
-import { UserStatus } from './schema'
+import { ProductStatus, UserStatus } from './schema'
 
 export const callTypes = new Map<UserStatus, string>([
   ['active', 'bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200'],
@@ -15,6 +15,12 @@ export const callTypes = new Map<UserStatus, string>([
     'bg-destructive/10 dark:bg-destructive/50 text-destructive dark:text-primary border-destructive/10',
   ],
 ])
+
+export const productTypes = new Map<ProductStatus, string>([
+  ['In Stock', 'bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200'],
+  ['Low Stock', 'bg-sky-200/40 text-sky-900 dark:text-sky-100 border-sky-300'],
+  ['Out of Stock', 'bg-destructive/10 dark:bg-destructive/50 text-destructive dark:text-primary border-destructive/10'],
+]);
 
 export const userTypes = [
   {

@@ -1,9 +1,10 @@
 import { IconMailPlus, IconUserPlus } from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
-import { useUsers } from '../context/users-context'
+//import { useUsers } from '../context/users-context'
+import { useProduct } from '../context/product-context'
 
 export function UsersPrimaryButtons() {
-  const { setOpen } = useUsers()
+  const { setOpen } = useProduct()
   return (
     <div className='flex gap-2'>
       {/* <Button

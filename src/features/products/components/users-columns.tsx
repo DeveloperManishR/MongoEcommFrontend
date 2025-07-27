@@ -6,6 +6,7 @@ import LongText from '@/components/long-text'
 import { Product } from '../data/schema'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
+import { productTypes } from '../data/data'
 
 export const columns: ColumnDef<Product>[] = [
   {
@@ -56,6 +57,8 @@ export const columns: ColumnDef<Product>[] = [
   },
   {
     accessorKey: 'category',
+      accessorFn: row => row.category?.name,
+
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Category' />
     ),
@@ -91,22 +94,27 @@ export const columns: ColumnDef<Product>[] = [
     ),
     cell: ({ row }) => <div>{row.getValue('stock')}</div>,
   },
+
   {
     accessorKey: 'availabilityStatus',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Availability' />
     ),
-    cell: ({ row }) => (
-      <Badge
-        variant='outline'
-        className={cn('capitalize', {
-          'text-green-600 border-green-600': row.getValue('availabilityStatus') === 'In Stock',
-          'text-red-600 border-red-600': row.getValue('availabilityStatus') === 'Out of Stock',
-        })}
-      >
-        {row.getValue('availabilityStatus')}
-      </Badge>
-    ),
+    cell: ({ row }) => {
+      const availabilityStatus = row.original.availabilityStatus as "In Stock" | "Out of Stock" | "Low Stock";
+      const badgeColor = productTypes.get(availabilityStatus)
+      return (
+        <div className='flex space-x-2'>
+          <Badge variant='outline' className={cn('capitalize', badgeColor)}>
+            {row.getValue('availabilityStatus')}
+          </Badge>
+        </div>
+      )
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
+    enableHiding: false,
     enableSorting: false,
   },
   {

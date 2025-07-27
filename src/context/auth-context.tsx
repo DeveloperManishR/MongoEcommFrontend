@@ -6,7 +6,6 @@ export interface AuthContextValue {
     handleLogin: (userData: object, token: string) => void;
     handleLogout: () => void;
 }
-
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export const useAuth = () => {
@@ -22,6 +21,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [token, setToken] = useState<string>("");
 
     const handleLogin = (userData: object, token: string) => {
+
+        localStorage.setItem('user', JSON.stringify(userData))
+        
+
         // console.log("Logged in user:", userData);
         // setUser(userData);
         // setToken(token);
@@ -36,17 +39,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         // localStorage.removeItem("userData");
     };
 
-    useEffect(() => {
-        const storedToken = localStorage.getItem("token");
-        const storedUser = localStorage.getItem("userData");
+    // useEffect(() => {
+    //     const storedToken = localStorage.getItem("token");
+    //     const storedUser = localStorage.getItem("userData");
 
-        if (storedToken) {
-            setToken(storedToken);
-        }
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
-    }, []);
+    //     if (storedToken) {
+    //        // setToken(storedToken);
+    //     }
+    //     if (storedUser) {
+    //         setUser(JSON.parse(storedUser));
+    //     }
+    // }, []);
 
     return (
         <AuthContext.Provider value={{ user, token, handleLogin, handleLogout }}>

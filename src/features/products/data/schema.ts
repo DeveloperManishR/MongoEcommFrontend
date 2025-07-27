@@ -10,7 +10,14 @@ const userStatusSchema = z.union([
   z.literal('invited'),
   z.literal('suspended'),
 ])
+const productStatusSchema = z.union([
+  z.literal('In Stock'),
+  z.literal('Out of Stock'),
+  z.literal('Low Stock'),
+  // z.literal('suspended'),
+])
 export type UserStatus = z.infer<typeof userStatusSchema>
+export type ProductStatus = z.infer<typeof productStatusSchema>
 
 const userRoleSchema = z.union([
   z.literal('superadmin'),
@@ -32,10 +39,13 @@ const userSchema = z.object({
   updatedAt: z.coerce.date(),
 })
 const productSchema = z.object({
-  id: z.string(), // use string to match _id in the JSON
+  _id: z.string(), // use string to match _id in the JSON
   title: z.string(),
   description: z.string(),
-  category: z.string(),
+ category: z.object({
+    _id: z.string(),
+    name: z.string()
+  }),
   price: z.number(),
   discountPercentage: z.number(),
   rating: z.number(),
